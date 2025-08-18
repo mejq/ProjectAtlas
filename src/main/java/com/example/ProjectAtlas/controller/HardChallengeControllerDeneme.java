@@ -1,5 +1,5 @@
 package com.example.ProjectAtlas.controller;
-
+import com.example.ProjectAtlas.repository.RepotRepository;
 import com.example.ProjectAtlas.entity.Report;
 import com.example.ProjectAtlas.service.FileService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,6 +33,7 @@ public class HardChallengeControllerDeneme {
     private final Path scenarioDir = Paths.get("scenario").toAbsolutePath().normalize();
     private final Map<String, Deque<Instant>> requestLog = new ConcurrentHashMap<>();
     private final FileService fileService;
+    private final RepotRepository repotRepository;
     private final int MAX_REQUESTS = 5;          // kısa sürede izin verilen maksimum istek
     private final int TIME_WINDOW_SECONDS = 10;  // zaman penceresi (örn. 10 saniye)
 
@@ -41,8 +42,9 @@ public class HardChallengeControllerDeneme {
     private volatile boolean rceUnlocked = false;
 
     @Autowired
-    public HardChallengeControllerDeneme(FileService fileService) throws IOException {
+    public HardChallengeControllerDeneme(FileService fileService, RepotRepository repotRepository) throws IOException {
         this.fileService = fileService;
+        this.repotRepository = repotRepository;
         Files.createDirectories(uploadDir);
         Files.createDirectories(scenarioDir);
     }
@@ -82,7 +84,7 @@ public class HardChallengeControllerDeneme {
     // --- Rapor listeleme ---
     @GetMapping("/reports/{id}")
     public ResponseEntity<Report> getReport(@PathVariable int id) {
-        Report report = reports.get(id);
+        Report report = repotRepository.getReferenceById(id);
         if (report == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(report);
     }

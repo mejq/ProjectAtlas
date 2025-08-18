@@ -8,7 +8,8 @@ import java.util.UUID;
 
 @Repository
 public interface RepotRepository extends JpaRepository<Report, UUID> {
-   // @Transactional
+    Report getReferenceById(int id);
+    // @Transactional
     //void deleteById(String ID);
    // Report findById(String ID);
 }
