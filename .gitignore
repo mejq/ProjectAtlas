@@ -1,0 +1,16 @@
+# OS ve editör geçici dosyaları
+*.log
+*.tmp
+*.swp
+*.DS_Store
+*.idea/
+*.vscode/
+
+# Maven ve derleme dosyaları
+/target/
+/out/
+/bin/
+
+/mvnw.cmd
+/mvnw
+/scenario/  # Bu klasörü ignore et
