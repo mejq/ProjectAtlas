@@ -88,7 +88,7 @@ public class HardChallengeControllerDeneme {
 
         // JSON içindeki report verisini deserialize et
         Object reportData = body.get("data");
-        mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+       // mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
         Report newReport = mapper.convertValue(reportData, Report.class);
 
         return ResponseEntity.ok("Yeni rapor başarıyla eklendi: ID=" + newReport.getId() + "\n");
