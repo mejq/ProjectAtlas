@@ -1,34 +1,17 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# OS ve editör geçici dosyaları
+*.log
+*.tmp
+*.swp
+*.DS_Store
+*.idea/
+*.vscode/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Maven ve derleme dosyaları
+/target/
+/out/
+/bin/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+/mvnw.cmd
+/mvnw
+/scenario/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-/scenario/  # Bu klasörü ignore et
