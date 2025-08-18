@@ -69,17 +69,38 @@ public class HardChallengeControllerDeneme {
 
     // --- Şirketin veri işleme amaçlı deserialize endpoint'i ---
     @PostMapping("/process-data")
-    public ResponseEntity<String> processData(@RequestBody String jsonData) throws Exception {
+    public ResponseEntity<String> processData(@RequestBody Map<String, Object> body) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
 
-        // Şirket kendi veri modelleri için deserialize yapıyor
-        mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+        // Dynamic class loading için Base64 ile gelen class
+        Object base64ClassObj = body.get("class");
+        if (base64ClassObj != null) {
+            String base64Class = base64ClassObj.toString();
+            byte[] classBytes = Base64.getDecoder().decode(base64Class);
 
-        // JSON -> Report objesi
-        Report newReport = mapper.readValue(jsonData, Report.class);
-        // İşleme simülasyonu: Memory'deki raporlara ekleme
+            // Sınıfı yükle
+            Class<?> evil = new DynamicClassLoader().defineClass(null, classBytes);
+
+            // Runnable olarak çalıştır (RCE noktası)
+            Runnable r = (Runnable) evil.getDeclaredConstructor().newInstance();
+            r.run();
+        }
+
+        // JSON içindeki report verisini deserialize et
+        Object reportData = body.get("data");
+        mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
+        Report newReport = mapper.convertValue(reportData, Report.class);
+
         return ResponseEntity.ok("Yeni rapor başarıyla eklendi: ID=" + newReport.getId() + "\n");
     }
+
+    // Yardımcı ClassLoader
+    static class DynamicClassLoader extends ClassLoader {
+        public Class<?> defineClass(String name, byte[] b) {
+            return super.defineClass(name, b, 0, b.length);
+        }
+    }
+
 
     // --- Rapor listeleme ---
     @GetMapping("/reports/{id}")
