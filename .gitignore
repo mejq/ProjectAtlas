@@ -13,4 +13,5 @@
 
 /mvnw.cmd
 /mvnw
-/scenario/  # Bu klasörü ignore et
+/scenario/
+
