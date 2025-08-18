@@ -1,10 +1,16 @@
 package com.example.ProjectAtlas.entity;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@Data
 public class User {
 
     @Id
