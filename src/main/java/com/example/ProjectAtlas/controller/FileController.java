@@ -18,7 +18,7 @@ import java.util.List;
 
 import static org.hibernate.search.backend.lucene.search.sort.impl.LuceneSearchSort.log;
 
-@CrossOrigin(origins = "http://192.168.1.28")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/files")
 public class FileController {
