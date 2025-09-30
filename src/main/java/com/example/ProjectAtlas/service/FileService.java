@@ -1,5 +1,5 @@
 package com.example.ProjectAtlas.service;
-import com.example.ProjectAtlas.entity.File;
+import com.example.ProjectAtlas.entity.ProjectFile;
 import com.example.ProjectAtlas.repository.FileRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +34,7 @@ public class FileService {
         file.transferTo(filePath.toFile());
 
         // DB kaydı
-        File entity = new File();
+        ProjectFile entity = new ProjectFile();
         entity.setFilename(filename);
         entity.setFilePath(filePath.toString());
         repository.save(entity);

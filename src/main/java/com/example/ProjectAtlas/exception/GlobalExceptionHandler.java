@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.LocalDateTime;
 
-@ControllerAdvice //exception içn
+@ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(NullPointerException.class)

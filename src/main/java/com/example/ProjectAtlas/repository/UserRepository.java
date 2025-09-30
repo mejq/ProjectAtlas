@@ -10,7 +10,5 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
     @Transactional
-    //void deleteById(Long id);
     User findUserByUsername(String username);
-    //User findByid(Long id);
 }

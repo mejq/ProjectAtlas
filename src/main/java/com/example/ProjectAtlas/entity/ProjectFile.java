@@ -11,7 +11,7 @@ import org.springframework.stereotype.Indexed;
 @Setter
 @Indexed
 @Table(name = "files")
-public class File {
+public class ProjectFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,6 +19,5 @@ public class File {
     private String filename;
     private String filePath;
 
-// Getters & Setters
 }
 

@@ -29,12 +29,4 @@ public class Report {
     private User user;
 
     public Report() {}
-
-    public Report(String title, String content, User user) {
-        this.title = title;
-        this.content = content;
-        this.user = user;
-    }
-
-    // Getters & Setters
 }

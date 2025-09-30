@@ -18,9 +18,18 @@ public class ReportService {
     @Autowired
     public ReportService(UserRepository userRepository) {
 
-        // Seed a few reports for demo
-        addReport(userRepository.findUserByUsername("alice"), "Alice Report 1", "Secret data 1");
-        addReport(userRepository.findUserByUsername("bob"),   "Bob Report 2",   "Secret data 2");
+        addReport(userRepository.findUserByUsername("alice"),
+                "Alice Report 1",
+                "Project Atlas – Employee Note\n\n" +
+                        "While reviewing the uploads folder, I noticed a folder named notes and a file that shouldn’t be there:\n\n" +
+                        "File: flag.txt\n" +
+                        "It seems to contain some admin credentials for TicketOS.\n\n" +
+                        "I recommend removing the file immediately and updating the admin password to prevent any issues.");
+        addReport(userRepository.findUserByUsername("bob"),
+                "Bob Report 2",
+                "Bob Daily Note\n\n" +
+                        "Had a meeting with the marketing team today. Discussed Q4 campaign strategies and upcoming deadlines. " +
+                        "Also reviewed some internal documents, nothing critical to report. Lunch was good.");
     }
 
     private void addReport(User user, String title, String content) {
@@ -33,20 +42,11 @@ public class ReportService {
         store.put(id, r);
     }
 
-    /** Return all reports (no security!). */
     public List<Report> listAll() {
         return new ArrayList<>(store.values());
     }
 
-    /** Find a report by id. No ownership checks (IDOR!). */
     public Optional<Report> findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
-
-    /** Simulate a “decrypt” operation – simply reverse the string. */
-    public String decrypt(String input) {
-        // Very simple “decryption” – just reverse the string
-        return new StringBuilder(input).reverse().toString();
-    }
-
 }

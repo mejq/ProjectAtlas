@@ -12,8 +12,8 @@ public class WebConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        // İzin verilen origin’ler – * yerine sadece WordPress domaininizi ekleyin
-        config.addAllowedOrigin("https://mywp.example.com");
+
+        config.addAllowedOrigin("http://127.0.0.1"); // evil classı engelleyebilir
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);

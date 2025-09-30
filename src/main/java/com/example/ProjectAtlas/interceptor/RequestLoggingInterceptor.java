@@ -16,7 +16,7 @@ public class RequestLoggingInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
-        log.info("----- [Request Log] -----");
+        log.info("[Request Log]");
         log.info("[*] Zaman: {}", LocalDateTime.now());
         log.info("[*] Method: {}", request.getMethod());
         log.info("[*] URL: {}", request.getRequestURL());
@@ -26,7 +26,6 @@ public class RequestLoggingInterceptor implements HandlerInterceptor {
             String h = headers.nextElement();
             log.info("{}: {}", h, request.getHeader(h));
         }
-        log.info("[( *_ *)?------\\( * v * )/-------\\(*_ * )]");
         return true;
     }
 }
