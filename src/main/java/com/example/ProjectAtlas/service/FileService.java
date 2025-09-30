@@ -27,13 +27,11 @@ public class FileService {
         Path uploadPath = Paths.get(uploadDir).toAbsolutePath().normalize();
         Files.createDirectories(uploadPath);
 
-        // Güvenli dosya adı
         String filename = file.getOriginalFilename();
         Path filePath = uploadPath.resolve(filename);
 
         file.transferTo(filePath.toFile());
 
-        // DB kaydı
         ProjectFile entity = new ProjectFile();
         entity.setFilename(filename);
         entity.setFilePath(filePath.toString());
