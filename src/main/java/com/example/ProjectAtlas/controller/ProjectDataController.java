@@ -1,8 +1,7 @@
 package com.example.ProjectAtlas.controller;
-
 import com.example.ProjectAtlas.entity.ProjectFile;
 import com.example.ProjectAtlas.repository.FileRepository;
-import com.example.ProjectAtlas.repository.RepotRepository;
+import com.example.ProjectAtlas.repository.ReportRepository;
 import com.example.ProjectAtlas.entity.Report;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +10,12 @@ import org.springframework.http.*;
 import com.example.ProjectAtlas.service.FileService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.nio.file.*;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
-
 import static org.hibernate.search.backend.lucene.search.sort.impl.LuceneSearchSort.log;
 
 @RestController
@@ -29,13 +26,13 @@ public class ProjectDataController {
     private final Path uploadDir = Paths.get("uploads").toAbsolutePath().normalize();
     private final Path scenarioDir = Paths.get("scenario").toAbsolutePath().normalize();
     private final Map<String, Deque<Instant>> requestLog = new ConcurrentHashMap<>();
-    private final RepotRepository repotRepository;
+    private final ReportRepository reportRepository;
     private final FileRepository fileRepository;
     private final FileService fileService;
 
     @Autowired
-    public ProjectDataController(RepotRepository repotRepository,FileRepository fileRepository,FileService fileService) throws IOException {
-        this.repotRepository = repotRepository;
+    public ProjectDataController(ReportRepository reportRepository, FileRepository fileRepository, FileService fileService) throws IOException {
+        this.reportRepository = reportRepository;
         this.fileRepository = fileRepository;
         this.fileService = fileService;
         Files.createDirectories(uploadDir);
@@ -89,7 +86,7 @@ public class ProjectDataController {
     //  Report listing
     @GetMapping("/reports/{id}")
     public ResponseEntity<Report> getReport(@PathVariable int id) {
-        Report report = repotRepository.getReferenceById(id);
+        Report report = reportRepository.getReferenceById(id);
         if (report == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(report);
     }
@@ -138,11 +135,8 @@ public class ProjectDataController {
                 fileRepository.delete(f);
             }
         }
-
         return validFiles;
     }
-
-
     // -------- Helper --------
     private String clientKey(HttpHeaders headers) {
         List<String> cookies = headers.getOrEmpty(HttpHeaders.COOKIE);

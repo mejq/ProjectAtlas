@@ -18,6 +18,5 @@ public class ProjectFile {
 
     private String filename;
     private String filePath;
-
 }
 

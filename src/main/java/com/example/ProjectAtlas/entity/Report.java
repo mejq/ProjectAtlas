@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Indexed;
 
-
 @Data
 @Entity
 @Getter
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Indexed;
 @Indexed
 @Table(name = "reports")
 public class Report {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

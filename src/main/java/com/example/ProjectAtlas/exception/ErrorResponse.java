@@ -1,7 +1,5 @@
 package com.example.ProjectAtlas.exception;
-
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter

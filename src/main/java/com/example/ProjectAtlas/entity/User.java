@@ -11,7 +11,6 @@ import java.util.List;
 @Setter
 @Data
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,5 +26,4 @@ public class User {
 
     public User() {
     }
-
 }

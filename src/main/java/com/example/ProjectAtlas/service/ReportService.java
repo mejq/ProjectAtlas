@@ -4,13 +4,11 @@ import  com.example.ProjectAtlas.repository.UserRepository;
 import com.example.ProjectAtlas.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class ReportService {
-
 
     private final Map<Long, Report> store = new HashMap<>();
     private final AtomicLong counter = new AtomicLong(1);
@@ -41,11 +39,9 @@ public class ReportService {
         r.setContent(content);
         store.put(id, r);
     }
-
     public List<Report> listAll() {
         return new ArrayList<>(store.values());
     }
-
     public Optional<Report> findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
